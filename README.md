@@ -1,1 +1,1 @@
-SpookyArtGame
+SpookyGame
