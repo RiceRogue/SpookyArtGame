@@ -42,7 +42,10 @@ public class Objects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Camera.main.enabled == true)
+        {
+            mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        }
         if (Physics.Raycast(mouseRay, out hit))
         {
             hitName = hit.collider.name;

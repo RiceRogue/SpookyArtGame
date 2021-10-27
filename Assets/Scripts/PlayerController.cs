@@ -7,17 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
 
-    public GameObject camera;
-    public float rotationSpeed;
-    public Image leftArrow;
-    public Image rightArrow;
-
-
-    public bool lookingLeft;
-    public bool lookingRight;
-
-    public float rotateSize;
-    public float rotateOriginal;
+    public Vector3 original;
 
     public float yaw;
     public float pitch;
@@ -30,8 +20,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        rotateOriginal = camera.transform.rotation.y;
+        original = transform.rotation.eulerAngles;
 
     }
 
@@ -45,39 +34,7 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("Game");
         }
 
-        //Camera Controls for when you can and cannot look left and right. 
-        if (Input.GetKeyUp(KeyCode.LeftArrow) && lookingLeft == false && lookingRight == false)
-        {
-            camera.transform.rotation = Quaternion.Euler(new Vector3(0, camera.transform.rotation.y - rotateSize, 0));
-            leftArrow.gameObject.SetActive(false);
-            lookingLeft = true;
-            //Trying smooth camra movement, and failed
-            //camera.transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.Euler(new Vector3(0,0, -0.3f)), 0.1f);
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftArrow) && lookingRight == true)
-        {
-            camera.transform.rotation = Quaternion.Euler(new Vector3(0, rotateOriginal, 0));
-            rightArrow.gameObject.SetActive(true);
-            lookingRight = false;
-            //camera.transform.rotation = Quaternion.Lerp(transform.rotation,  Quaternion.Euler(new Vector3(0, 0, -0.3f)), 0.1f);
-        }
-
-
-        if (Input.GetKeyUp(KeyCode.RightArrow) && lookingRight == false && lookingLeft == false)
-        {
-            camera.transform.rotation = Quaternion.Euler(new Vector3(0, camera.transform.rotation.y + rotateSize, 0));
-            rightArrow.gameObject.SetActive(false);
-            lookingRight = true;
-            //camera.transform.rotation = Quaternion.Lerp(transform.rotation,  Quaternion.Euler(new Vector3(0, 0, -0.3f)), 0.1f);
-        }
-        else if (Input.GetKeyUp(KeyCode.RightArrow) && lookingLeft == true)
-        {
-
-            camera.transform.rotation = Quaternion.Euler(new Vector3(0, rotateOriginal, 0));
-            leftArrow.gameObject.SetActive(true);
-            lookingLeft = false;
-            //camera.transform.rotation = Quaternion.Lerp(transform.rotation,  Quaternion.Euler(new Vector3(0, 0, -0.3f)), 0.1f);
-        }
+        
 
 
         yaw += Input.GetAxis("Mouse X") * horizontalSpeed;
@@ -86,7 +43,7 @@ public class PlayerController : MonoBehaviour
         float newYaw = Mathf.Clamp(yaw, -3, 3);
         float newPitch = Mathf.Clamp(pitch, -20, 2);
 
-        transform.eulerAngles = new Vector3(-newPitch, newYaw, 0.0f);
+        transform.eulerAngles = original + new Vector3(-newPitch, newYaw, 0.0f);
 
 
 
