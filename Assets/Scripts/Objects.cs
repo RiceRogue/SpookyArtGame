@@ -55,7 +55,7 @@ public class Objects : MonoBehaviour
 
         Monster1 monster1script = monster1.GetComponent<Monster1>();
 
-        if (Input.GetKeyDown(KeyCode.E) && movedObject && gameObject.name == "CameraObject") { 
+        if (Input.GetKey(KeyCode.E) && movedObject && gameObject.name == "FlashLight") { 
             flashImage.color = flashColour;
             monster1script.resetPosition = true;
             
@@ -70,7 +70,7 @@ public class Objects : MonoBehaviour
     }
     void OnMouseDown()
     {
-        if (hitName == "CameraObject" && moveToYou == false)
+        if (hitName == "FlashLight" && moveToYou == false)
         {
             cameraText.enabled = true;
             hit.collider.GetComponent<Rigidbody>().position = Camera.main.gameObject.GetComponent<Rigidbody>().position + new Vector3(0, -0.1f, 0.45f);
@@ -79,7 +79,7 @@ public class Objects : MonoBehaviour
             moveToYou = true;
 
         }
-        else if (hitName == "CameraObject" && movedObject)
+        else if (hitName == "FlashLight" && movedObject)
         {
             hit.collider.GetComponent<Rigidbody>().position = originalLocation;
             cameraText.enabled = false;
