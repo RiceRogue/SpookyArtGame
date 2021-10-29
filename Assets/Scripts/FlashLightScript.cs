@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class FlashLightScript : MonoBehaviour
 {
@@ -59,23 +57,33 @@ public class FlashLightScript : MonoBehaviour
 
         Monster1 monster1script = monster1.GetComponent<Monster1>();
 
-        if (Input.GetKey(KeyCode.E) && movedObject && gameObject.name == "FlashLight") { 
+        /*if (Input.GetKey(KeyCode.E) && movedObject && gameObject.name == "FlashLight")
+        {
             flashImage.color = flashColour;
             monster1script.resetPosition = true;
-            
-        } else
-        {
-            flashImage.color = Color.Lerp(flashImage.color, Color.clear, flashSpeed * Time.deltaTime);
-
-
 
         }
+        else
+        {
+            flashImage.color = Color.Lerp(flashImage.color, Color.clear, flashSpeed * Time.deltaTime);
+        }*/
 
         if (movedObject)
         {
             transform.localEulerAngles = Camera.main.transform.localEulerAngles;
         }
 
+        if (Input.GetKey(KeyCode.E) && movedObject && gameObject.name == "FlashLight")
+        {
+            gameObject.GetComponentInChildren<Light>().enabled = true;
+            monster1script.resetPosition = true;
+
+        }
+        else
+        {
+            gameObject.GetComponentInChildren<Light>().enabled = false;
+
+        }
     }
     void OnMouseDown()
     {
@@ -91,8 +99,8 @@ public class FlashLightScript : MonoBehaviour
         }
         else if (hitName == "FlashLight" && movedObject)
         {
-            hit.collider.transform.localEulerAngles = new Vector3(0,0,0.2f);
-            hit.collider.GetComponent<Rigidbody>().position = landingZone.transform.position + new Vector3(0,0.03f,-0.02f);
+            hit.collider.transform.localEulerAngles = new Vector3(0, 0, 0.2f);
+            hit.collider.GetComponent<Rigidbody>().position = landingZone.transform.position + new Vector3(0, 0.03f, -0.02f);
             cameraText.enabled = false;
             moveToYou = false;
             movedObject = false;
@@ -106,4 +114,4 @@ public class FlashLightScript : MonoBehaviour
 
 }
 
-    
+
