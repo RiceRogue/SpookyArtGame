@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Objects : MonoBehaviour
+public class FlashLightScript : MonoBehaviour
 {
     public Ray mouseRay;
     public RaycastHit hit;
@@ -29,6 +29,7 @@ public class Objects : MonoBehaviour
 
 
     public GameObject monster1;
+    public GameObject landingZone;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,13 +71,19 @@ public class Objects : MonoBehaviour
 
         }
 
+        if (movedObject)
+        {
+            transform.localEulerAngles = Camera.main.transform.localEulerAngles;
+        }
+
     }
     void OnMouseDown()
     {
         if (hitName == "FlashLight" && moveToYou == false)
         {
             cameraText.enabled = true;
-            hit.collider.GetComponent<Rigidbody>().position = Camera.main.gameObject.GetComponent<Rigidbody>().position + new Vector3(0, -0.1f, 0.45f);
+            hit.collider.GetComponent<Rigidbody>().position = Camera.main.gameObject.GetComponent<Rigidbody>().position + new Vector3(0.2f, -0.1f, 0.45f);
+            hit.collider.transform.localEulerAngles = Camera.main.transform.localEulerAngles;
             //gameObject.GetComponent<Rigidbody>().MovePosition(camera.transform.position + new Vector3(0, 0, 5f) * Time.deltaTime * 0.1f);
             movedObject = true;
             moveToYou = true;
@@ -84,7 +91,8 @@ public class Objects : MonoBehaviour
         }
         else if (hitName == "FlashLight" && movedObject)
         {
-            hit.collider.GetComponent<Rigidbody>().position = originalLocation;
+            hit.collider.transform.localEulerAngles = new Vector3(0,0,0.2f);
+            hit.collider.GetComponent<Rigidbody>().position = landingZone.transform.position + new Vector3(0,0.03f,-0.02f);
             cameraText.enabled = false;
             moveToYou = false;
             movedObject = false;
