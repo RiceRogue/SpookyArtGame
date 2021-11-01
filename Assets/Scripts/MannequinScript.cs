@@ -12,6 +12,10 @@ public class MannequinScript : MonoBehaviour
 
     public Vector3 originRotation;
     public Vector3 origin;
+
+    public Ray mouseRay;
+    public RaycastHit hit;
+    public string hitName;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,5 +51,30 @@ public class MannequinScript : MonoBehaviour
         {
             //Do nothing
         }
+
+
+
+        if (Camera.main.enabled == true)
+        {
+            mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        }
+        if (Physics.Raycast(mouseRay, out hit))
+        {
+            hitName = hit.collider.name;
+        }
+        else
+        {
+            hitName = " ";
+        }
+    }
+
+    void OnMouseDown()
+    {
+        
+            Debug.Log("Tyes");
+            Vector3 direction = (origin - transform.position).normalized;
+            rgb.MovePosition(transform.position + direction * moveSpeed * 20f* Time.deltaTime);
+        
+
     }
 }

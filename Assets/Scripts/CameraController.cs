@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+
 public class CameraController : MonoBehaviour
 {
     public GameObject cameraLeft;
@@ -19,12 +20,20 @@ public class CameraController : MonoBehaviour
     public float rotateSize;
     public float rotateOriginal;
 
+    public Image heartBar;
+    public Image blinkBar;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         cameraLeft.SetActive(false);
-        cameraRight.SetActive(false); 
-        
+        cameraRight.SetActive(false);
+
+        heartBar = GetComponent<Image>();
+
+
     }
 
     // Update is called once per frame
