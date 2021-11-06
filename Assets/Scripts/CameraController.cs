@@ -41,7 +41,7 @@ public class CameraController : MonoBehaviour
     {
 
         //Camera Controls for when you can and cannot look left and right. 
-        if (Input.GetKeyUp(KeyCode.LeftArrow) && lookingLeft == false && lookingRight == false)
+        if (Input.GetKeyUp(KeyCode.A) && lookingLeft == false && lookingRight == false)
         {
             cameraLeft.SetActive(true);
             cameraMain.SetActive(false);
@@ -50,7 +50,7 @@ public class CameraController : MonoBehaviour
             lookingLeft = true;
             
         }
-        else if (Input.GetKeyUp(KeyCode.LeftArrow) && lookingRight == true)
+        else if (Input.GetKeyUp(KeyCode.A) && lookingRight == true)
         {
             cameraMain.SetActive(true);
             cameraRight.SetActive(false);
@@ -61,7 +61,7 @@ public class CameraController : MonoBehaviour
         }
 
 
-        if (Input.GetKeyUp(KeyCode.RightArrow) && lookingRight == false && lookingLeft == false)
+        if (Input.GetKeyUp(KeyCode.D) && lookingRight == false && lookingLeft == false)
         {
             cameraRight.SetActive(true);
             cameraMain.SetActive(false);
@@ -70,7 +70,7 @@ public class CameraController : MonoBehaviour
             lookingRight = true;
             //camera.transform.rotation = Quaternion.Lerp(transform.rotation,  Quaternion.Euler(new Vector3(0, 0, -0.3f)), 0.1f);
         }
-        else if (Input.GetKeyUp(KeyCode.RightArrow) && lookingLeft == true)
+        else if (Input.GetKeyUp(KeyCode.D) && lookingLeft == true)
         {
             cameraMain.SetActive(true);
             cameraLeft.SetActive(false);

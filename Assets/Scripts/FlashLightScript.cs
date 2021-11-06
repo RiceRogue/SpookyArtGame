@@ -20,7 +20,6 @@ public class FlashLightScript : MonoBehaviour
     public Vector3 originalLocation;
 
 
-    public Image flashImage;
     public float flashSpeed = 1.5f;
     //Time the flash lasts for
     public Color flashColour = new Color(1f, 1f, 1f, 1f);
@@ -34,7 +33,6 @@ public class FlashLightScript : MonoBehaviour
         moveToYou = false;
         originalLocation = transform.position;
         cameraText.enabled = false;
-        flashImage.color = Color.clear;
 
     }
 
@@ -99,7 +97,7 @@ public class FlashLightScript : MonoBehaviour
         }
         else if (hitName == "FlashLight" && movedObject)
         {
-            hit.collider.transform.localEulerAngles = new Vector3(0, 0, 0.2f);
+            hit.collider.transform.localEulerAngles = new Vector3(0, 90, 0.2f);
             hit.collider.GetComponent<Rigidbody>().position = landingZone.transform.position + new Vector3(0, 0.03f, -0.02f);
             cameraText.enabled = false;
             moveToYou = false;

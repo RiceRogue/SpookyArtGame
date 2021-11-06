@@ -14,6 +14,7 @@ public class SceneSwitcher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.Minus))
         {
             SceneManager.LoadScene("Morning2");
