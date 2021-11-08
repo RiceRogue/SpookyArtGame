@@ -9,6 +9,8 @@ public class HeartBeatScript : MonoBehaviour
     public float heartSpeed;
     public float heartMax;
 
+    public AudioSource audio;
+
     
 
     // Start is called before the first frame update
@@ -17,6 +19,7 @@ public class HeartBeatScript : MonoBehaviour
         heart = GetComponent<Image>();
         heart.fillAmount = 0;
         heartMax = Random.Range(60, 100);
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -30,7 +33,7 @@ public class HeartBeatScript : MonoBehaviour
         {
             heartSpeed = heartMax;
 
-
+            audio.Play();
             heartSpeed = 0;
 
         }
