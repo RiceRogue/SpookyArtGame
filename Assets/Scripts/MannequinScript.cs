@@ -71,9 +71,8 @@ public class MannequinScript : MonoBehaviour
     void OnMouseDown()
     {
         
-            Debug.Log("Tyes");
             Vector3 direction = (origin - transform.position).normalized;
-            rgb.MovePosition(transform.position + direction * moveSpeed * 20f* Time.deltaTime);
+            rgb.MovePosition(transform.position + direction * moveSpeed * 15f* Time.deltaTime);
         
 
     }

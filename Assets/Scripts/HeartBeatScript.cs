@@ -18,7 +18,7 @@ public class HeartBeatScript : MonoBehaviour
     {
         heart = GetComponent<Image>();
         heart.fillAmount = 0;
-        heartMax = Random.Range(60, 100);
+        heartMax = Random.Range(1, 2);
         audio = GetComponent<AudioSource>();
     }
 
@@ -26,7 +26,7 @@ public class HeartBeatScript : MonoBehaviour
     void Update()
     {
 
-        heartSpeed++;
+        heartSpeed+=Time.deltaTime;
         heart.fillAmount = heartSpeed / heartMax;
 
         if (heart.fillAmount == 1)

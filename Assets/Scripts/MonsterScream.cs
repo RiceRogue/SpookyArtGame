@@ -24,7 +24,7 @@ public class MonsterScream : MonoBehaviour
     {
 
 
-        if(scream.volume < 0.02 && screamo == false)
+        if(scream.volume < 0.03 && screamo == false)
         {
             scream.Play();
             scream.volume += 0.00005f; 
