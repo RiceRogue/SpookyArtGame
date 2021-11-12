@@ -24,6 +24,8 @@ public class MannequinScript : MonoBehaviour
     public GameObject box3;
 
     public AudioSource deathSound;
+    public AudioSource walking;
+
     public bool resetScene;
 
     public float timer;
@@ -56,7 +58,7 @@ public class MannequinScript : MonoBehaviour
         if (camControlScript.lookingLeft == true)
         {
             Vector3 direction = (destination.transform.position - transform.position).normalized;
-
+            walking.Play();
             rgb.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
             Quaternion desiredRotation = Quaternion.Euler(0, -220f, 0);
             transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotation, 2.5f * moveSpeed * Time.deltaTime);
@@ -65,6 +67,7 @@ public class MannequinScript : MonoBehaviour
         //IE Looking in the middle or away from the mannequin.
         else if (camControlScript.lookingLeft == false && camControlScript.lookingRight == false)
         {
+            walking.Play();
             Vector3 direction = (destination.transform.position - transform.position).normalized;
             rgb.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
             Quaternion desiredRotation = Quaternion.Euler(0, -220f, 0);
