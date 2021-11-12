@@ -97,8 +97,8 @@ public class FlashLightScript : MonoBehaviour
         }
         else if (hitName == "FlashLight" && movedObject)
         {
-            hit.collider.transform.localEulerAngles = new Vector3(0, 90, 0.2f);
-            hit.collider.GetComponent<Rigidbody>().position = landingZone.transform.position + new Vector3(0, 0.03f, -0.02f);
+            hit.collider.transform.localEulerAngles = new Vector3(1f, 2f, -2f);
+            hit.collider.GetComponent<Rigidbody>().position = landingZone.transform.position + new Vector3(0, 0.03f, -0.1f);
             cameraText.enabled = false;
             moveToYou = false;
             movedObject = false;

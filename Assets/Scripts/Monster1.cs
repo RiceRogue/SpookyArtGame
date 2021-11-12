@@ -19,9 +19,14 @@ public class Monster1: MonoBehaviour
     public Vector3 origin;
 
     public AudioSource monster1Scream;
+    public AudioSource deathSound;
+
+    public GameObject lungeBox;
 
 
     public bool resetScene;
+    public bool pursue;
+    public bool lunge;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +34,6 @@ public class Monster1: MonoBehaviour
         origin = gameObject.transform.position;
         randInt = Random.Range(20f, 30f);
 
-        monster1Scream = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -37,16 +41,19 @@ public class Monster1: MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if(timer > randInt)
+        if(timer > randInt || pursue == true)
         {
+            pursue = true;
+            timer = 0;
             gameObject.transform.position = Vector3.SmoothDamp(gameObject.transform.position, Camera.main.transform.position,ref refPos,  3f);
-            
         }
 
         if(resetPosition == true)
         {
-            randInt = Random.Range(5f, 10f);
+            randInt = Random.Range(10f, 30f);
             timer = 0;
+            timer2 = 0;
+            lungeBox.GetComponent<BoxCollider>().enabled = true;
             gameObject.transform.position = origin;
             resetPosition = false;
         }
@@ -54,10 +61,22 @@ public class Monster1: MonoBehaviour
         if(resetScene == true)
         {
             timer2 += Time.deltaTime;
-            if (timer2 > 2f)
+            if (timer2 > 2.5f)
             {
                 SceneManager.LoadScene("Game");
 
+            }
+        }
+
+        if (lunge == true)
+        {
+            timer2 += Time.deltaTime;
+            if (timer2 > 4f)
+            {
+                lungeBox.GetComponent<BoxCollider>().enabled = false;
+                pursue = true;
+                lunge = false;
+                timer2 = 0;
             }
         }
     }
@@ -66,10 +85,17 @@ public class Monster1: MonoBehaviour
     {
         if(collision.gameObject.name == Camera.main.gameObject.name)
         {
-            monster1Scream.Play();
-
+            deathSound.Play();
+            
             resetScene = true;
 
         }
+        else if (collision.gameObject.name == lungeBox.name){
+
+            //pursue = false;
+            monster1Scream.Play();
+            lunge = true;
+        }
+
     }
 }
