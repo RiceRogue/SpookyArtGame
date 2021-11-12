@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MannequinScript : MonoBehaviour
 {
@@ -16,6 +17,16 @@ public class MannequinScript : MonoBehaviour
     public Ray mouseRay;
     public RaycastHit hit;
     public string hitName;
+    public GameObject destination;
+
+    public GameObject box1;
+    public GameObject box2;
+    public GameObject box3;
+
+    public AudioSource deathSound;
+    public bool resetScene;
+
+    public float timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,15 +34,28 @@ public class MannequinScript : MonoBehaviour
         origin = transform.position;
         rgb = GetComponent<Rigidbody>();
         camControlScript = cameraControl.GetComponent<CameraController>();
+        destination = box1;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if(camControlScript.lookingLeft == true)
+        if(transform.position == origin)
         {
-            Vector3 direction = (cameraControl.transform.position - transform.position).normalized;
+            destination = box1;
+            box1.GetComponent<BoxCollider>().enabled = true;
+            box2.GetComponent<BoxCollider>().enabled = true;
+            box3.GetComponent<BoxCollider>().enabled = true;
+
+
+
+        }
+
+
+        if (camControlScript.lookingLeft == true)
+        {
+            Vector3 direction = (destination.transform.position - transform.position).normalized;
 
             rgb.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
             Quaternion desiredRotation = Quaternion.Euler(0, -220f, 0);
@@ -41,7 +65,7 @@ public class MannequinScript : MonoBehaviour
         //IE Looking in the middle or away from the mannequin.
         else if (camControlScript.lookingLeft == false && camControlScript.lookingRight == false)
         {
-            Vector3 direction = (cameraControl.transform.position - transform.position).normalized;
+            Vector3 direction = (destination.transform.position - transform.position).normalized;
             rgb.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
             Quaternion desiredRotation = Quaternion.Euler(0, -220f, 0);
             transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotation, 2.5f * moveSpeed * Time.deltaTime);
@@ -51,6 +75,20 @@ public class MannequinScript : MonoBehaviour
         {
             //Do nothing
         }
+
+
+        if (resetScene == true)
+        {
+
+            timer += Time.deltaTime;
+            if (timer > 2.5f)
+            {
+                SceneManager.LoadScene("Game");
+
+            }
+        }
+
+
 
 
 
@@ -70,10 +108,36 @@ public class MannequinScript : MonoBehaviour
 
     void OnMouseDown()
     {
-        
-            Vector3 direction = (origin - transform.position).normalized;
-            rgb.MovePosition(transform.position + direction * moveSpeed * 15f* Time.deltaTime);
-        
+
+        Vector3 direction = (origin - transform.position).normalized;
+        rgb.MovePosition(transform.position + direction * moveSpeed * 15f * Time.deltaTime);
+
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == box1.name)
+        {
+            destination = box2;
+            box1.GetComponent<BoxCollider>().enabled = false;
+
+        } else if (collision.gameObject.name == box2.name)
+        {
+            destination = box3;
+            box2.GetComponent<BoxCollider>().enabled = false;
+
+        } else if (collision.gameObject.name == box3.name)
+        {
+            destination = cameraControl;
+            box3.GetComponent<BoxCollider>().enabled = false;
+
+        } else if (collision.gameObject.name == cameraControl.name)
+        {
+            deathSound.Play();
+            resetScene = true;
+
+        }
 
     }
 }

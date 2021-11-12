@@ -60,6 +60,7 @@ public class Monster1: MonoBehaviour
 
         if(resetScene == true)
         {
+
             timer2 += Time.deltaTime;
             if (timer2 > 2.5f)
             {
@@ -86,7 +87,7 @@ public class Monster1: MonoBehaviour
         if(collision.gameObject.name == Camera.main.gameObject.name)
         {
             deathSound.Play();
-            
+
             resetScene = true;
 
         }

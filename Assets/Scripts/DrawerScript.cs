@@ -10,6 +10,11 @@ public class DrawerScript : MonoBehaviour
 
     public bool opened;
     public Vector3 origin;
+
+    public AudioSource drawerOpen;
+    public AudioSource drawerClose;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,12 +49,14 @@ public class DrawerScript : MonoBehaviour
             Vector3 moveLocation = origin + new Vector3(0, 0, -0.15f);
             hit.collider.GetComponent<Rigidbody>().position = moveLocation;
             opened = true;
+            drawerOpen.Play();
 
         }
         else if (hitName == "drawer1" && opened == true)
         {
             hit.collider.GetComponent<Rigidbody>().position = origin;
             opened = false;
+            drawerClose.Play();
 
         }
 
