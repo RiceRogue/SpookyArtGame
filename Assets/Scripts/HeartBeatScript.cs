@@ -8,6 +8,8 @@ public class HeartBeatScript : MonoBehaviour
     public Image heart;
     public float heartSpeed;
     public float heartMax;
+    public int heartState;
+    public float heartBeat;
 
     public AudioSource audio;
 
@@ -18,7 +20,9 @@ public class HeartBeatScript : MonoBehaviour
     {
         heart = GetComponent<Image>();
         heart.fillAmount = 0;
-        heartMax = Random.Range(1, 2);
+        heartState = 1;
+        heartMax = 1;
+        heartBeat = 0;
         audio = GetComponent<AudioSource>();
     }
 
@@ -26,10 +30,19 @@ public class HeartBeatScript : MonoBehaviour
     void Update()
     {
 
-        heartSpeed+=Time.deltaTime;
-        heart.fillAmount = heartSpeed / heartMax;
+        heartSpeed += Time.deltaTime;
+        heartBeat = heartSpeed / heartMax;
 
-        if (heart.fillAmount == 1)
+        
+
+
+       
+
+    }
+
+    void heartPlay()
+    {
+        if (heartBeat == 1)
         {
             heartSpeed = heartMax;
 
@@ -37,9 +50,5 @@ public class HeartBeatScript : MonoBehaviour
             heartSpeed = 0;
 
         }
-
-
-       
-
     }
 }
