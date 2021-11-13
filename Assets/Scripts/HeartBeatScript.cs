@@ -23,10 +23,10 @@ public class HeartBeatScript : MonoBehaviour
         heart = GetComponent<Image>();
         heart.fillAmount = 0;
         //heartState = 1; //the conditional
-        heartThresh = 1; //threshold for each beat
-        heartMeter = 0;
-        heartMax = 51; //max
-        heartBeat = 0; 
+        heartThresh = 1f; //threshold for each beat
+        heartMeter = 0f;
+        heartMax = 51f; //max
+        heartBeat = 0f; 
         audio = GetComponent<AudioSource>();
     }
 
@@ -39,22 +39,22 @@ public class HeartBeatScript : MonoBehaviour
 
         if (heartMeter <= 20) //state 1: normal 
         {
-            heartThresh = 1;
+            heartThresh = 1f;
             
         }
-        else if (21 <= heartMeter <= 35) //state 2: slightly fast 
+        else if (21 <= heartMeter && heartMeter <= 35) //state 2: slightly fast 
         {
-            heartThresh = .75;
+            heartThresh = .75f;
 
         }
-        else if (36 <= heartMeter <= 45) //state 3: fast 
+        else if (36 <= heartMeter && heartMeter <= 45) //state 3: fast 
         {
-            heartThresh = .55;
+            heartThresh = .55f;
 
         }
-        else if (46 <= heartMeter <= 50) //state 4: HEY-YOURE-ABOUT-TO-DIE-fast 
+        else if (46 <= heartMeter && heartMeter <= 50) //state 4: HEY-YOURE-ABOUT-TO-DIE-fast 
         {
-            heartThresh = .4;
+            heartThresh = .4f;
 
         }
         else if (heartMeter == 51) //state 5: stroke and death
@@ -78,7 +78,7 @@ public class HeartBeatScript : MonoBehaviour
         heartSpeed = heartThresh;
 
         audio.Play();
-        heartSpeed = 0;
+        heartSpeed = 0f;
  
     }
 }
