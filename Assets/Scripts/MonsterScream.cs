@@ -26,13 +26,16 @@ public class MonsterScream : MonoBehaviour
     {
         HeartBeatScript hbs = HeartRate.GetComponent<HeartBeatScript>();
 
-        if(scream.volume < 0.02 && screamo == false)
+        if(scream.volume < 0.04 && screamo == false)
         {
             scream.Play();
             scream.volume += 0.00005f;
-            hbs.heartSpeed += 0.00001f;
-            
-        } else if (scream.volume > 0.0)
+            hbs.heartSpeed += 0.001f;
+            hbs.heartMeter += 0.001f;
+
+
+        }
+        else if (scream.volume > 0.0)
         {
             screamo = true;
             scream.Play();

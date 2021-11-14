@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HeartBeatScript : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class HeartBeatScript : MonoBehaviour
 
     public AudioSource audio;
 
+
+    public float timer2;
     
 
     // Start is called before the first frame update
@@ -37,7 +40,7 @@ public class HeartBeatScript : MonoBehaviour
     {
         
         heartSpeed += Time.deltaTime;
-        heartMeter += Time.deltaTime;
+        //heartMeter += Time.deltaTime;
 
         if (heartMeter <= 20) //state 1: normal 
         {
@@ -47,7 +50,6 @@ public class HeartBeatScript : MonoBehaviour
         else if (21 <= heartMeter && heartMeter <= 35) //state 2: slightly fast 
         {
             heartThresh = .75f;
-            Debug.Log("YES");
 
         }
         else if (36 <= heartMeter && heartMeter <= 45) //state 3: fast 
@@ -60,9 +62,16 @@ public class HeartBeatScript : MonoBehaviour
             heartThresh = .4f;
 
         }
-        else if (heartMeter == 51) //state 5: stroke and death
+        else if (heartMeter >= 51) //state 5: stroke and death
         {
             //game over
+            timer2 += Time.deltaTime;
+            if (timer2 > 2.5f)
+            {
+                SceneManager.LoadScene("Game");
+
+            }
+
 
         }
 
@@ -84,6 +93,7 @@ public class HeartBeatScript : MonoBehaviour
     {
         audio.Play();
         heartSpeed = 0f;
+        heartMeter++;
  
     }
 }

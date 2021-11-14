@@ -96,7 +96,7 @@ public class Monster1: MonoBehaviour
         else if (collision.gameObject.name == lungeBox.name){
 
             //pursue = false;
-            monster1Scream.Play();
+            //monster1Scream.Play();
             lunge = true;
         }
 
