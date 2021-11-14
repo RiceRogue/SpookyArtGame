@@ -13,6 +13,8 @@ public class HeartBeatScript : MonoBehaviour
     public int heartState;
     public float heartBeat;
 
+    public bool accel = false;
+
     public AudioSource audio;
 
     
@@ -66,7 +68,11 @@ public class HeartBeatScript : MonoBehaviour
         heartBeat = heartSpeed / heartThresh;
         heart.fillAmount = heartMeter / heartMax;
 
-        heartPlay();
+        if(heartSpeed == heartThresh)
+        {
+            heartPlay();
+        }
+        
 
 
        
@@ -75,8 +81,6 @@ public class HeartBeatScript : MonoBehaviour
 
     void heartPlay()
     {
-        heartSpeed = heartThresh;
-
         audio.Play();
         heartSpeed = 0f;
  
