@@ -50,7 +50,9 @@ public class Monster1: MonoBehaviour
 
         if(resetPosition == true)
         {
-            randInt = Random.Range(10f, 30f);
+            randInt = Random.Range(20f, 30f);
+            lunge = false;
+            pursue = false;
             timer = 0;
             timer2 = 0;
             lungeBox.GetComponent<BoxCollider>().enabled = true;

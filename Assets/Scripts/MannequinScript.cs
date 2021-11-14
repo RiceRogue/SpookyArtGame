@@ -29,6 +29,8 @@ public class MannequinScript : MonoBehaviour
     public bool resetScene;
 
     public float timer;
+
+    public float timer2;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,7 +60,13 @@ public class MannequinScript : MonoBehaviour
         if (camControlScript.lookingLeft == true)
         {
             Vector3 direction = (destination.transform.position - transform.position).normalized;
-            walking.Play();
+
+            timer2+=Time.deltaTime;
+            if (timer2 > 1f)
+            {
+                walking.Play();
+                timer2 = 0;
+            }
             rgb.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
             Quaternion desiredRotation = Quaternion.Euler(0, -220f, 0);
             transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotation, 2.5f * moveSpeed * Time.deltaTime);
@@ -67,7 +75,12 @@ public class MannequinScript : MonoBehaviour
         //IE Looking in the middle or away from the mannequin.
         else if (camControlScript.lookingLeft == false && camControlScript.lookingRight == false)
         {
-            walking.Play();
+            timer2+=Time.deltaTime;
+            if (timer2 > 1f)
+            {
+                walking.Play();
+                timer2 = 0;
+            }
             Vector3 direction = (destination.transform.position - transform.position).normalized;
             rgb.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
             Quaternion desiredRotation = Quaternion.Euler(0, -220f, 0);

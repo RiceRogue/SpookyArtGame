@@ -74,7 +74,11 @@ public class FlashLightScript : MonoBehaviour
         if (Input.GetKey(KeyCode.E) && movedObject && gameObject.name == "FlashLight")
         {
             gameObject.GetComponentInChildren<Light>().enabled = true;
-            monster1script.resetPosition = true;
+
+            if (monster1script.lunge == true || monster1script.pursue == true)
+            {
+                monster1script.resetPosition = true;
+            }
 
         }
         else

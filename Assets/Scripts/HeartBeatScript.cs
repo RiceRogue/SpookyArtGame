@@ -47,6 +47,7 @@ public class HeartBeatScript : MonoBehaviour
         else if (21 <= heartMeter && heartMeter <= 35) //state 2: slightly fast 
         {
             heartThresh = .75f;
+            Debug.Log("YES");
 
         }
         else if (36 <= heartMeter && heartMeter <= 45) //state 3: fast 
@@ -68,7 +69,7 @@ public class HeartBeatScript : MonoBehaviour
         heartBeat = heartSpeed / heartThresh;
         heart.fillAmount = heartMeter / heartMax;
 
-        if(heartSpeed == heartThresh)
+        if(heartSpeed >= heartThresh)
         {
             heartPlay();
         }
