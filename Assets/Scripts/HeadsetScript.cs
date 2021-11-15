@@ -57,19 +57,22 @@ public class HeadsetScript : MonoBehaviour
 
         }
 
-        if (Input.GetKey(KeyCode.Space) && movedObject && gameObject.name == "earmuff")
+        if (Input.GetKey(KeyCode.Space) && movedObject)
+
         {
             transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-    
+            GetComponent<Rigidbody>().position = originalLocation;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
             transform.localEulerAngles = originalRotation;
-            GetComponent<Rigidbody>().position = originalLocation; 
-            if(GetComponent<Rigidbody>().position == originalLocation ) 
-            {
-                 transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-    
-            }
+            
             moveToYou = false;
             movedObject = false;
+
+        }
+
+        if (GetComponent<Rigidbody>().position == originalLocation && movedObject == false)
+        {
+            //transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
 
         }
         if (reducing)
@@ -93,15 +96,18 @@ public class HeadsetScript : MonoBehaviour
             //gameObject.GetComponent<Rigidbody>().MovePosition(camera.transform.position + new Vector3(0, 0, 5f) * Time.deltaTime * 0.1f);
             movedObject = true;
             moveToYou = true;
+            transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+
+
 
         }
-        
-
-        
 
 
 
-   }
+
+
+
+    }
 
 
     private void OnCollisionEnter(Collision collision)
@@ -111,6 +117,7 @@ public class HeadsetScript : MonoBehaviour
             AudioListener boof = Camera.main.transform.GetComponent<AudioListener>();
             AudioListener.volume = 0.1f;
             reducing = true;
+            transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
             transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
         } else
         {
