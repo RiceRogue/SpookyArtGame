@@ -37,24 +37,33 @@ public class MonsterScream : MonoBehaviour
                 scream.Play();
                 timer2 = 0;
             }
-            scream.volume += 0.00005f;
+            scream.volume += 0.0005f;
             hbs.heartSpeed += 0.001f;
             hbs.heartMeter += 0.001f;
 
 
         }
-        else if (scream.volume > 0.0)
+        else if (scream.volume >= 0.5 && screamo == false )
+        {
+        
+            screamo = true;
+          
+        } else if (screamo == true && scream.volume <= 0.6 && scream.volume >= 0.12)
         {
             anim.speed = 1;
-            screamo = true;
             scream.Play();
-            scream.volume -= 0.00005f;
-        } else if (scream.volume == 0 && screamo == true)
-        {
-            screamo = false;
-            anim.speed = 0;
+            scream.volume -= 0.001f;
             
+        } else if (scream.volume >= 0.1 && screamo == true ) 
+        {
+            anim.speed = 0; 
+            screamo = false; 
+
+
         }
+    
+
+    
 
     }
 

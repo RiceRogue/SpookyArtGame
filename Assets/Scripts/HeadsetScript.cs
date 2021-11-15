@@ -53,7 +53,7 @@ public class HeadsetScript : MonoBehaviour
         {
             transform.localEulerAngles = Camera.main.transform.localEulerAngles;
 
-            GetComponent<Rigidbody>().position = Vector3.SmoothDamp(transform.position, Camera.main.transform.position + new Vector3(0, 0f, 0.1f), ref refPos, 0.3f);
+            GetComponent<Rigidbody>().position = Vector3.SmoothDamp(transform.position, Camera.main.transform.position + new Vector3(-0.15f, 0f, 0.1f), ref refPos, 0.3f);
 
         }
 

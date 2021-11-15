@@ -48,27 +48,27 @@ public class HeartBeatScript : MonoBehaviour
         heartSpeed += Time.deltaTime;
         //heartMeter += Time.deltaTime;
 
-        if (heartMeter <= 20) //state 1: normal 
+        if (heartMeter <= 40) //state 1: normal 
         {
             heartThresh = 1f;
             
         }
-        else if (21 <= heartMeter && heartMeter <= 35) //state 2: slightly fast 
+        else if (41 <= heartMeter && heartMeter <= 70) //state 2: slightly fast 
         {
             heartThresh = .75f;
 
         }
-        else if (36 <= heartMeter && heartMeter <= 45) //state 3: fast 
+        else if (71 <= heartMeter && heartMeter <= 90) //state 3: fast 
         {
             heartThresh = .55f;
 
         }
-        else if (46 <= heartMeter && heartMeter <= 50) //state 4: HEY-YOURE-ABOUT-TO-DIE-fast 
+        else if (91 <= heartMeter && heartMeter <= 100) //state 4: HEY-YOURE-ABOUT-TO-DIE-fast 
         {
             heartThresh = .4f;
 
         }
-        else if (heartMeter >= 51) //state 5: stroke and death
+        else if (heartMeter >= 101) //state 5: stroke and death
         {
             //game over
             timer2 += Time.deltaTime;

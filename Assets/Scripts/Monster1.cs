@@ -35,7 +35,7 @@ public class Monster1: MonoBehaviour
     {
         refPos = Vector3.zero;
         origin = gameObject.transform.position;
-        randInt = Random.Range(20f, 30f);
+        randInt = Random.Range(5f, 20f);
 
 
     }
@@ -55,7 +55,7 @@ public class Monster1: MonoBehaviour
 
         if(resetPosition == true)
         {
-            randInt = Random.Range(20f, 30f);
+            randInt = Random.Range(5f, 20f);
             lunge = false;
             pursue = false;
             anim.speed = 0.5f; //animationanim

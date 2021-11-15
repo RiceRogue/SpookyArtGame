@@ -244,7 +244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a0c7495be04f85944bdfcd7dd3cd3278, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.558
+      value: -0.44
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a0c7495be04f85944bdfcd7dd3cd3278, type: 3}
       propertyPath: m_LocalPosition.y
@@ -668,6 +668,8 @@ MonoBehaviour:
   mon: {fileID: 0}
   man: {fileID: 0}
   scm: {fileID: 0}
+  anim: {fileID: 1120754318}
+  animscream: {fileID: 1909344628}
   clocktimer: 0
 --- !u!1 &324177325
 GameObject:
@@ -693,7 +695,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 324177325}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.3008, y: 0.3432311, z: 0.1408}
+  m_LocalPosition: {x: 0.396, y: 0.3432311, z: 0.083}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2302656610464000023}
@@ -7839,6 +7841,7 @@ GameObject:
   - component: {fileID: 1305127394}
   - component: {fileID: 1305127392}
   - component: {fileID: 1305127393}
+  - component: {fileID: 1305127395}
   m_Layer: 6
   m_Name: LeftViewCamera
   m_TagString: MainCamera
@@ -7903,6 +7906,19 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!65 &1305127395
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305127391}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.73353344, y: 1, z: 1}
+  m_Center: {x: 0.1332333, y: 0, z: 0}
 --- !u!20 &1305127396
 Camera:
   m_ObjectHideFlags: 0
@@ -7955,7 +7971,7 @@ Transform:
   m_GameObject: {fileID: 1305127391}
   m_LocalRotation: {x: 0.012818778, y: -0.3826466, z: 0.0053097117, w: 0.92379063}
   m_LocalPosition: {x: 0.038, y: 0.568, z: -0.643}
-  m_LocalScale: {x: 0.3544065, y: 0.22572, z: 0.47111}
+  m_LocalScale: {x: 0.3544065, y: 0.22572, z: 0.43321052}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -8577,7 +8593,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 287d5fe4ff29a8a49a83adaf5c4a0c48, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 0.1
   m_Pitch: 0.44
   Loop: 0
   Mute: 0
@@ -12145,7 +12161,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7555185752953191562, guid: 60b1ebb4442198b4cb550bf91dccecc9, type: 3}
+  - {fileID: 2100000, guid: b3319821b1ee24548b1c4fc7808a2516, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
