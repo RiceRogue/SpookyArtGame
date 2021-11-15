@@ -18,9 +18,10 @@ public class SoundManager2 : MonoBehaviour
     public GameObject MonsterScream;
 
     public Monster1 mon;
-    public MannequinScript man;
+    public MannequinScript man; //save 
     public MonsterScream scm;
-
+    public Animator anim; 
+    public Animator animscream; 
     public float clocktimer;
 
 
@@ -30,7 +31,8 @@ public class SoundManager2 : MonoBehaviour
         mon = MonsterPortrait.GetComponent<Monster1>();
         man = MonsterMannequin.GetComponent<MannequinScript>();
         scm = MonsterScream.GetComponent<MonsterScream>();
-
+        animcream.speed = 0f; 
+        anim.speed = 0f; 
         mon.enabled = false;
         man.enabled = false;
         scm.enabled = false;
@@ -59,11 +61,14 @@ public class SoundManager2 : MonoBehaviour
         if (timerScream > 60f)
         {
             scm.enabled = true;
+            animcream.speed = 1f;
+
         }
 
-        if (timerScream > 90f)
+        if (timerPortrait > 90f)
         {
             mon.enabled = true;
+            anim.speed = 1f; 
         }
 
 

@@ -27,12 +27,16 @@ public class Monster1: MonoBehaviour
     public bool resetScene;
     public bool pursue;
     public bool lunge;
+    public Animator anim; 
+
+  
     // Start is called before the first frame update
     void Start()
     {
         refPos = Vector3.zero;
         origin = gameObject.transform.position;
         randInt = Random.Range(20f, 30f);
+
 
     }
 
@@ -44,6 +48,7 @@ public class Monster1: MonoBehaviour
         if(timer > randInt || pursue == true)
         {
             pursue = true;
+            anim.speed = 1f; //animation
             timer = 0;
             gameObject.transform.position = Vector3.SmoothDamp(gameObject.transform.position, Camera.main.transform.position + new Vector3(0,0f,0.1f),ref refPos,  3f);
         }
@@ -53,6 +58,7 @@ public class Monster1: MonoBehaviour
             randInt = Random.Range(20f, 30f);
             lunge = false;
             pursue = false;
+            anim.speed = 0.5f; //animationanim
             timer = 0;
             timer2 = 0;
             lungeBox.GetComponent<BoxCollider>().enabled = true;
@@ -77,6 +83,7 @@ public class Monster1: MonoBehaviour
             if (timer2 > 4f)
             {
                 lungeBox.GetComponent<BoxCollider>().enabled = false;
+                anim.speed = 2.5f; 
                 pursue = true;
                 lunge = false;
                 timer2 = 0;
