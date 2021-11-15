@@ -60,14 +60,18 @@ public class HeadsetScript : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && movedObject && gameObject.name == "earmuff")
         {
             transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-
+    
             transform.localEulerAngles = originalRotation;
-            GetComponent<Rigidbody>().position = originalLocation + new Vector3(0, 0.03f, -0.1f);
+            GetComponent<Rigidbody>().position = originalLocation; 
+            if(GetComponent<Rigidbody>().position == originalLocation ) 
+            {
+                 transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+    
+            }
             moveToYou = false;
             movedObject = false;
 
         }
-
         if (reducing)
         {
             heartRate.GetComponent<HeartBeatScript>().heartMeter -= Time.deltaTime*2;
