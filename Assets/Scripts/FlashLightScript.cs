@@ -27,6 +27,8 @@ public class FlashLightScript : MonoBehaviour
 
     public GameObject monster1;
     public GameObject landingZone;
+
+    public AudioSource click;
     // Start is called before the first frame update
     void Start()
     {
@@ -71,7 +73,7 @@ public class FlashLightScript : MonoBehaviour
             transform.localEulerAngles = Camera.main.transform.localEulerAngles;
         }
 
-        if (Input.GetKey(KeyCode.E) && movedObject && gameObject.name == "FlashLight")
+        if (Input.GetKey(KeyCode.Space) && movedObject && gameObject.name == "FlashLight")
         {
             gameObject.GetComponentInChildren<Light>().enabled = true;
 
@@ -81,6 +83,8 @@ public class FlashLightScript : MonoBehaviour
             }
 
         }
+
+        
         else
         {
             gameObject.GetComponentInChildren<Light>().enabled = false;
@@ -91,6 +95,7 @@ public class FlashLightScript : MonoBehaviour
     {
         if (hitName == "FlashLight" && moveToYou == false)
         {
+            click.Play();
             cameraText.enabled = true;
             hit.collider.GetComponent<Rigidbody>().position = Camera.main.gameObject.GetComponent<Rigidbody>().position + new Vector3(0.2f, -0.1f, 0.45f);
             hit.collider.transform.localEulerAngles = Camera.main.transform.localEulerAngles;
@@ -101,6 +106,7 @@ public class FlashLightScript : MonoBehaviour
         }
         else if (hitName == "FlashLight" && movedObject)
         {
+            click.Play();
             hit.collider.transform.localEulerAngles = new Vector3(1f, 2f, -2f);
             hit.collider.GetComponent<Rigidbody>().position = landingZone.transform.position + new Vector3(0, 0.03f, -0.1f);
             cameraText.enabled = false;

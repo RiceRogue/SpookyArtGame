@@ -30,15 +30,21 @@ public class HeartBeatScript : MonoBehaviour
         //heartState = 1; //the conditional
         heartThresh = 1f; //threshold for each beat
         heartMeter = 0f;
-        heartMax = 51f; //max
+        heartMax = 100f; //max
         heartBeat = 0f; 
         audio = GetComponent<AudioSource>();
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(heartMeter <= 0)
+        {
+            heartMeter = 0;
+        }
+
         heartSpeed += Time.deltaTime;
         //heartMeter += Time.deltaTime;
 
@@ -68,7 +74,7 @@ public class HeartBeatScript : MonoBehaviour
             timer2 += Time.deltaTime;
             if (timer2 > 2.5f)
             {
-                SceneManager.LoadScene("Game");
+                SceneManager.LoadScene("HeartDeath");
 
             }
 

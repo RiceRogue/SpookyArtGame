@@ -8,11 +8,11 @@ public class MonsterScream : MonoBehaviour
 
     public AudioSource scream;
 
-    public int maxVol;
-    public int vol;
+    
 
     public bool screamo;
     public Image HeartRate;
+    public float timer2;
 
     // Start is called before the first frame update
     void Start()
@@ -24,11 +24,17 @@ public class MonsterScream : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         HeartBeatScript hbs = HeartRate.GetComponent<HeartBeatScript>();
 
-        if(scream.volume < 0.04 && screamo == false)
+        if(scream.volume < 0.5 && screamo == false)
         {
-            scream.Play();
+            timer2 += Time.deltaTime;
+            if (timer2 > 5f || timer2 == 0)
+            {
+                scream.Play();
+                timer2 = 0;
+            }
             scream.volume += 0.00005f;
             hbs.heartSpeed += 0.001f;
             hbs.heartMeter += 0.001f;

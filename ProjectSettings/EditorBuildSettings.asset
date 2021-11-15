@@ -8,4 +8,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
+  - enabled: 1
+    path: Assets/Scenes/TimeDeath.unity
+    guid: a9878d577946b65458547fef706e8d05
+  - enabled: 1
+    path: Assets/Scenes/PortraitDeath.unity
+    guid: 2a7b4293ea13c4e47bd136b389d799c7
+  - enabled: 1
+    path: Assets/Scenes/MannequinDeath.unity
+    guid: 28182681aada5c74c8332260991deccf
+  - enabled: 1
+    path: Assets/Scenes/Intro.unity
+    guid: a5b3ae2db7a5d6943970162249a92ad8
+  - enabled: 1
+    path: Assets/Scenes/HeartDeath.unity
+    guid: 8cbb39b0cebfbe94e93633cc75c4edaf
   m_configObjects: {}

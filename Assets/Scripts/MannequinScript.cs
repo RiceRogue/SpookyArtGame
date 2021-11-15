@@ -31,6 +31,8 @@ public class MannequinScript : MonoBehaviour
     public float timer;
 
     public float timer2;
+    public GameObject platform;
+    public bool originate;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,14 +47,14 @@ public class MannequinScript : MonoBehaviour
     void Update()
     {
 
-        if(transform.position == origin)
+        if(originate)
         {
             destination = box1;
             box1.GetComponent<BoxCollider>().enabled = true;
             box2.GetComponent<BoxCollider>().enabled = true;
             box3.GetComponent<BoxCollider>().enabled = true;
 
-
+            originate = false;
 
         }
 
@@ -99,7 +101,7 @@ public class MannequinScript : MonoBehaviour
             timer += Time.deltaTime;
             if (timer > 2.5f)
             {
-                SceneManager.LoadScene("Game");
+                SceneManager.LoadScene("MannequinDeath");
 
             }
         }
@@ -153,6 +155,9 @@ public class MannequinScript : MonoBehaviour
             deathSound.Play();
             resetScene = true;
 
+        } else if (collision.gameObject.name == platform.name)
+        {
+            originate = true;
         }
 
     }

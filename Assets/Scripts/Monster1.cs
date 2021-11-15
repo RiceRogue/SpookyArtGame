@@ -45,7 +45,7 @@ public class Monster1: MonoBehaviour
         {
             pursue = true;
             timer = 0;
-            gameObject.transform.position = Vector3.SmoothDamp(gameObject.transform.position, Camera.main.transform.position,ref refPos,  3f);
+            gameObject.transform.position = Vector3.SmoothDamp(gameObject.transform.position, Camera.main.transform.position + new Vector3(0,0f,0.1f),ref refPos,  3f);
         }
 
         if(resetPosition == true)
@@ -66,7 +66,7 @@ public class Monster1: MonoBehaviour
             timer2 += Time.deltaTime;
             if (timer2 > 2.5f)
             {
-                SceneManager.LoadScene("Game");
+                SceneManager.LoadScene("PortraitDeath");
 
             }
         }
@@ -89,6 +89,7 @@ public class Monster1: MonoBehaviour
         if(collision.gameObject.name == Camera.main.gameObject.name)
         {
             deathSound.Play();
+
 
             resetScene = true;
 
