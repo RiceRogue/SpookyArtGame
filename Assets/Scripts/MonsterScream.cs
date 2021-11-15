@@ -7,6 +7,7 @@ public class MonsterScream : MonoBehaviour
 {
 
     public AudioSource scream;
+    public Animator anim;
 
     
 
@@ -29,6 +30,7 @@ public class MonsterScream : MonoBehaviour
 
         if(scream.volume < 0.5 && screamo == false)
         {
+            anim.speed = 1;
             timer2 += Time.deltaTime;
             if (timer2 > 5f || timer2 == 0)
             {
@@ -43,12 +45,14 @@ public class MonsterScream : MonoBehaviour
         }
         else if (scream.volume > 0.0)
         {
+            anim.speed = 1;
             screamo = true;
             scream.Play();
             scream.volume -= 0.00005f;
         } else if (scream.volume == 0 && screamo == true)
         {
             screamo = false;
+            anim.speed = 0;
             
         }
 
