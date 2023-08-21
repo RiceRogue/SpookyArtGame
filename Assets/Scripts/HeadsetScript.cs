@@ -27,7 +27,7 @@ public class HeadsetScript : MonoBehaviour
     void Start()
     {
         refPos = Vector3.zero;
-
+        reducing = false;
         originalLocation = transform.position;
         originalRotation = transform.localEulerAngles;
 
@@ -53,22 +53,22 @@ public class HeadsetScript : MonoBehaviour
         {
             transform.localEulerAngles = Camera.main.transform.localEulerAngles;
 
-            GetComponent<Rigidbody>().position = Vector3.SmoothDamp(transform.position, Camera.main.transform.position + new Vector3(-0.15f, 0f, 0.1f), ref refPos, 0.3f);
-
+            GetComponent<Rigidbody>().position = Vector3.Lerp(transform.position, Camera.main.transform.position + new Vector3(-0.3f, 0, .3f), 0.1f);
+            //Vector3.Lerp(transform.position, Camera.main.transform.position + new Vector3(0, 1, 0), 0.1f);
         }
 
-        if (Input.GetKey(KeyCode.Space) && movedObject)
+        /* if (Input.GetMouseButtonDown(0) && movedObject && moveToYou)
 
-        {
-            transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-            GetComponent<Rigidbody>().position = originalLocation;
-            GetComponent<Rigidbody>().velocity = Vector3.zero;
-            transform.localEulerAngles = originalRotation;
-            
-            moveToYou = false;
-            movedObject = false;
+         {
+             transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+             GetComponent<Rigidbody>().position = originalLocation;
+             GetComponent<Rigidbody>().velocity = Vector3.zero;
+             transform.localEulerAngles = originalRotation;
 
-        }
+             moveToYou = false;
+             movedObject = false;
+
+         }*/
 
         if (GetComponent<Rigidbody>().position == originalLocation && movedObject == false)
         {
@@ -77,7 +77,23 @@ public class HeadsetScript : MonoBehaviour
         }
         if (reducing)
         {
-            heartRate.GetComponent<HeartBeatScript>().heartMeter -= Time.deltaTime*2;
+            heartRate.GetComponent<HeartBeatScript>().heartMeter -= Time.deltaTime * 2;
+
+        }
+
+
+        if (Vector3.Distance(transform.position, Camera.main.transform.position + new Vector3(-0.3f, 0, .3f)) < 0.1f)
+        {
+            AudioListener boof = Camera.main.transform.GetComponent<AudioListener>();
+            AudioListener.volume = 0.1f;
+            reducing = true;
+            transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+        }
+        else
+        {
+            reducing = false;
+            AudioListener.volume = 1f;
 
         }
 
@@ -101,30 +117,26 @@ public class HeadsetScript : MonoBehaviour
 
 
         }
-
-
-
-
-
-
-    }
-
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.name == Camera.main.name)
+        else if (hitName == "earmuff" && movedObject)
         {
-            AudioListener boof = Camera.main.transform.GetComponent<AudioListener>();
-            AudioListener.volume = 0.1f;
-            reducing = true;
-            transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-        } else
-        {
+            audio.Play();
+            transform.localEulerAngles = originalRotation;
+            transform.position = originalLocation + new Vector3(0, 0.03f, -0.1f);
             reducing = false;
-            AudioListener.volume = 1f;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            moveToYou = false;
+            movedObject = false;
 
         }
 
+
+
+
+
+
     }
+
+
+   
 }
